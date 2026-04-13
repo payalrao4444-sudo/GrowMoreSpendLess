@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Predict – Kitchen Garden</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#0d1a10;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.wrap{max-width:800px;width:100%;text-align:center}
+h1{font-family:'Playfair Display',serif;font-size:42px;margin-bottom:12px;color:#b7e4c7}
+p{color:rgba(255,255,255,0.5);margin-bottom:32px}
+.back-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(82,183,136,0.2);border:1px solid rgba(82,183,136,0.4);border-radius:12px;color:#52b788;text-decoration:none;font-size:14px;transition:0.3s;margin-bottom:32px}
+.back-btn:hover{background:rgba(82,183,136,0.3)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:28px;cursor:pointer;transition:all 0.3s;text-decoration:none;color:inherit}
+.card:hover{border-color:#52b788;transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.3)}
+.card-icon{font-size:48px;margin-bottom:16px}
+.card-title{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px}
+.card-sub{font-size:13px;color:rgba(255,255,255,0.5)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="/dashboard" class="back-btn">← Back to Dashboard</a>
+  <h1>🤖 AI Prediction Center</h1>
+  <p>Choose what you'd like to analyze</p>
+  <div class="grid">
+    <a href="/dashboard" onclick="sessionStorage.setItem('goto','container')" class="card">
+      <div class="card-icon">🪴</div>
+      <div class="card-title">Container Classifier</div>
+      <div class="card-sub">Upload a container image to get crop suggestions based on size</div>
+    </a>
+    <a href="/dashboard" onclick="sessionStorage.setItem('goto','disease')" class="card">
+      <div class="card-icon">🔬</div>
+      <div class="card-title">Disease Detector</div>
+      <div class="card-sub">Upload a plant leaf photo for AI-powered disease diagnosis</div>
+    </a>
+    <a href="/dashboard" onclick="sessionStorage.setItem('goto','recommend')" class="card">
+      <div class="card-icon">✨</div>
+      <div class="card-title">AI Recommender</div>
+      <div class="card-sub">Get personalized crop picks based on your season and space</div>
+    </a>
+    <a href="/dashboard" onclick="sessionStorage.setItem('goto','weather')" class="card">
+      <div class="card-icon">🌤️</div>
+      <div class="card-title">Weather Advisor</div>
+      <div class="card-sub">See crops suited for current weather in your location</div>
+    </a>
+  </div>
+</div>
+</body>
+</html>

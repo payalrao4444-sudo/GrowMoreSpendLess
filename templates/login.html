@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Smart Kitchen Garden – Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #2d6a4f;
+  --green-light: #52b788;
+  --green-pale: #b7e4c7;
+  --gold: #d4a843;
+  --cream: #fefae0;
+  --dark: #1b2617;
+  --glass: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.18);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(135deg, #0d1f15 0%, #1b3a28 40%, #0a1a10 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Particle canvas */
+#particles { position: fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+/* Floating orbs */
+.orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.25; animation: float-orb 8s ease-in-out infinite; z-index: 0; pointer-events:none; }
+.orb-1 { width:400px; height:400px; background:radial-gradient(circle,#52b788,transparent); top:-100px; left:-100px; animation-delay:0s; }
+.orb-2 { width:300px; height:300px; background:radial-gradient(circle,#d4a843,transparent); bottom:-80px; right:-80px; animation-delay:3s; }
+.orb-3 { width:200px; height:200px; background:radial-gradient(circle,#74c69d,transparent); top:50%; left:60%; animation-delay:5s; }
+
+@keyframes float-orb {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(30px,-30px) scale(1.1); }
+}
+
+.container {
+  position: relative; z-index: 10;
+  display: grid; grid-template-columns: 1fr 1fr;
+  width: 900px; max-width: 95vw;
+  min-height: 560px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px var(--glass-border);
+}
+
+/* Left panel */
+.brand-panel {
+  background: linear-gradient(160deg, rgba(82,183,136,0.3) 0%, rgba(45,106,79,0.5) 100%);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--glass-border);
+  padding: 60px 50px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.brand-panel::before {
+  content:''; position:absolute; inset:0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2352b788' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.logo { font-family: 'Playfair Display', serif; }
+.logo-icon { font-size: 60px; margin-bottom: 20px; display: block; animation: pulse-icon 3s ease-in-out infinite; }
+@keyframes pulse-icon { 0%,100%{transform:scale(1) rotate(0deg);} 50%{transform:scale(1.05) rotate(3deg);} }
+.logo h1 { font-size: 32px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 8px; }
+.logo h1 span { color: var(--green-pale); }
+.logo p { font-family: 'DM Sans', sans-serif; color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 40px; }
+
+.features { display: flex; flex-direction: column; gap: 14px; }
+.feature { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.8); font-size: 13px; }
+.feature-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-light); flex-shrink: 0; box-shadow: 0 0 8px var(--green-light); }
+
+/* Right panel - form */
+.form-panel {
+  background: rgba(10,20,14,0.85);
+  backdrop-filter: blur(30px);
+  padding: 60px 50px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.tabs { display: flex; gap: 0; margin-bottom: 36px; border-radius: 12px; background: rgba(255,255,255,0.05); padding: 4px; }
+.tab {
+  flex: 1; padding: 10px; text-align: center; border: none; background: transparent;
+  color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; border-radius: 10px; transition: all 0.3s;
+}
+.tab.active { background: var(--green); color: white; box-shadow: 0 4px 12px rgba(82,183,136,0.4); }
+
+.form { display: none; animation: slide-in 0.4s ease; }
+.form.active { display: block; }
+@keyframes slide-in { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+.form-group input {
+  width: 100%; padding: 14px 18px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; color: white; font-family: 'DM Sans', sans-serif; font-size: 15px;
+  outline: none; transition: all 0.3s;
+}
+.form-group input::placeholder { color: rgba(255,255,255,0.25); }
+.form-group input:focus { border-color: var(--green-light); background: rgba(82,183,136,0.08); box-shadow: 0 0 0 3px rgba(82,183,136,0.1); }
+
+.btn-submit {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
+  border: none; border-radius: 12px; color: white;
+  font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden;
+  margin-top: 8px; letter-spacing: 0.02em;
+}
+.btn-submit::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,transparent,rgba(255,255,255,0.15)); opacity:0; transition:0.3s; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(82,183,136,0.4); }
+.btn-submit:hover::after { opacity:1; }
+.btn-submit:active { transform: translateY(0); }
+
+.msg { margin-top: 14px; padding: 12px 16px; border-radius: 10px; font-size: 13px; text-align: center; display: none; }
+.msg.error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+.msg.success { background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3); color: var(--green-pale); }
+
+.loading { display: none; text-align: center; padding: 10px; color: var(--green-light); font-size: 14px; }
+.spinner { display: inline-block; width:16px; height:16px; border:2px solid rgba(82,183,136,0.3); border-top-color:var(--green-light); border-radius:50%; animation:spin 0.8s linear infinite; margin-right:8px; vertical-align:middle; }
+@keyframes spin { to { transform:rotate(360deg); } }
+
+@media(max-width:680px) {
+  .container { grid-template-columns: 1fr; }
+  .brand-panel { padding: 40px 30px 30px; }
+  .form-panel { padding: 30px; }
+  .logo h1 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="container">
+  <div class="brand-panel">
+    <div class="logo">
+      <span class="logo-icon">🌿</span>
+      <h1>AI Smart<br><span>Kitchen Garden</span></h1>
+      <p>Your intelligent urban farming companion</p>
+    </div>
+    <div class="features">
+      <div class="feature"><div class="feature-dot"></div>Weather-based crop recommendations</div>
+      <div class="feature"><div class="feature-dot"></div>AI plant disease detection</div>
+      <div class="feature"><div class="feature-dot"></div>100% organic farming guidance</div>
+      <div class="feature"><div class="feature-dot"></div>Companion planting intelligence</div>
+      <div class="feature"><div class="feature-dot"></div>Smart container gardening</div>
+      <div class="feature"><div class="feature-dot"></div>Waste to fertilizer guides</div>
+    </div>
+  </div>
+
+  <div class="form-panel">
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('login')">Sign In</button>
+      <button class="tab" onclick="switchTab('signup')">Create Account</button>
+    </div>
+
+    <!-- Login Form -->
+    <form class="form active" id="login-form" onsubmit="submitLogin(event)">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn-submit">Sign In to Garden 🌱</button>
+      <div class="loading" id="login-loading"><span class="spinner"></span>Signing in...</div>
+      <div class="msg" id="login-msg"></div>
+    </form>
+
+    <!-- Signup Form -->
+    <form class="form" id="signup-form" onsubmit="submitSignup(event)">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Choose a username" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Create a strong password" required>
+      </div>
+      <div class="form-group">
+        <label>Your City / Location</label>
+        <input type="text" name="location" placeholder="e.g. Mumbai, Delhi, Jaipur" required>
+      </div>
+      <button type="submit" class="btn-submit">Start Growing 🪴</button>
+      <div class="loading" id="signup-loading"><span class="spinner"></span>Creating account...</div>
+      <div class="msg" id="signup-msg"></div>
+    </form>
+  </div>
+</div>
+
+<script>
+// Particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+const particles = Array.from({length: 60}, () => ({
+  x: Math.random() * canvas.width,
+  y: Math.random() * canvas.height,
+  size: Math.random() * 3 + 1,
+  speed: Math.random() * 0.5 + 0.1,
+  opacity: Math.random() * 0.5 + 0.1,
+  color: Math.random() > 0.5 ? '#52b788' : '#d4a843'
+}));
+
+function drawParticles() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.opacity;
+    ctx.fill();
+    p.y -= p.speed;
+    if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='signup')));
+  document.getElementById('login-form').classList.toggle('active', tab==='login');
+  document.getElementById('signup-form').classList.toggle('active', tab==='signup');
+}
+
+async function submitLogin(e) {
+  e.preventDefault();
+  const form = e.target;
+  const loading = document.getElementById('login-loading');
+  const msg = document.getElementById('login-msg');
+  loading.style.display = 'block'; msg.style.display = 'none';
+  form.querySelector('.btn-submit').style.display = 'none';
+  const body = new URLSearchParams(new FormData(form));
+  try {
+    const res = await fetch('/login', {method:'POST', body});
+    const data = await res.json();
+    if (data.success) { window.location.href = data.redirect; }
+    else {
+      msg.textContent = data.error; msg.className = 'msg error'; msg.style.display = 'block';
+      loading.style.display = 'none'; form.querySelector('.btn-submit').style.display = 'block';
+    }
+  } catch { msg.textContent = 'Connection error'; msg.className = 'msg error'; msg.style.display = 'block'; loading.style.display = 'none'; form.querySelector('.btn-submit').style.display = 'block'; }
+}
+
+async function submitSignup(e) {
+  e.preventDefault();
+  const form = e.target;
+  const loading = document.getElementById('signup-loading');
+  const msg = document.getElementById('signup-msg');
+  loading.style.display = 'block'; msg.style.display = 'none';
+  form.querySelector('.btn-submit').style.display = 'none';
+  const fd = new FormData(form);
+  const body = {username:fd.get('username'), password:fd.get('password'), location:fd.get('location')};
+  try {
+    const res = await fetch('/signup', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)});
+    const data = await res.json();
+    if (data.success) { window.location.href = data.redirect; }
+    else {
+      msg.textContent = data.error; msg.className = 'msg error'; msg.style.display = 'block';
+      loading.style.display = 'none'; form.querySelector('.btn-submit').style.display = 'block';
+    }
+  } catch { msg.textContent = 'Connection error'; msg.className = 'msg error'; msg.style.display = 'block'; loading.style.display = 'none'; form.querySelector('.btn-submit').style.display = 'block'; }
+}
+</script>
+</body>
+</html>

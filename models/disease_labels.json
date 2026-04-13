@@ -1,0 +1,16 @@
+{
+  "0": "Augmented_Eggplant_Insect_Pest_Disease",
+  "1": "Augmented_Eggplant_Leaf_Spot_Disease",
+  "2": "Augmented_Healthy_Potato",
+  "3": "Augmented_Potato_Dry_Rot_Disease",
+  "4": "Cauliflower_Bacterial_spot_rot",
+  "5": "Cauliflower_Black_Rot",
+  "6": "Cauliflower_Downy_Mildew",
+  "7": "Cauliflower_carrot",
+  "8": "Potato_Blackspot_Bruising_Disease",
+  "9": "Potato_Tomato_Septoria_leaf_spot",
+  "10": "Tomato_Bacterial_spot",
+  "11": "Tomato_Early_blight",
+  "12": "Tomato_Late_blight",
+  "13": "Tomato_Leaf_Mold"
+}
